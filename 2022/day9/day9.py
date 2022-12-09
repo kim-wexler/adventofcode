@@ -4,8 +4,8 @@ data = sys.stdin.read().splitlines()
 data = [(a, int(b)) for a, b in [line.split(" ") for line in data]]
 
 def set_pos(pos):
-    for i in range(len(pos)-2, -1, -1):
-        x, y = pos[i+1]
+    for i in range(1, len(pos)):
+        x, y = pos[i-1]
         dx, dy = pos[i]
         if abs(x-dx) > 1 or abs(y-dy) > 1:
             if x > dx:
@@ -27,9 +27,9 @@ for (a, b) in data:
     for i in range(b):
         x += c[0]
         y += c[1]
-        pos[-1] = (x, y)
+        pos[0] = (x, y)
         set_pos(pos)
-        tailpt1.add(pos[-2])
-        tailpt2.add(pos[0])
+        tailpt1.add(pos[1])
+        tailpt2.add(pos[-1])
 
 print(len(tailpt1), len(tailpt2))
